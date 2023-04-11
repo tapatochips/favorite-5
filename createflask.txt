@@ -1,0 +1,58 @@
+For Flask projects:
+IN TERMINAL:
+    
+    TO CREATE:
+    python3 -m venv my_venv
+    
+    TO ACTIVATE THE ENVIRONMENT:
+    source my_venv/bin/activate
+        
+        TO QUIT:
+        deactivate
+    
+    TO INSTALL FLASK INSIDE YOUR LOCAL ENVIRONMENT:
+    pip install flask python-dotenv
+    
+    STORES PACKAGES AND THEIR CORRESPONDING TYPES (don't forget to update this):
+    pip freeze > requirements.txt
+Here is the basic file structure
+my_venv (created for us, do not touch)
+.env 
+.gitignore 
+config.py 
+requirements.txt
+run.py
+app/ ->
+        routes.py
+        __init__.py
+        static/ ->
+                    main.css
+                    [any other CSS files]
+        templates/ ->
+                    base.html
+                    index.html 
+                    [any other html files]
+-- routes.py and the .html files in the templates/ folder are what change. --
+The following files stay consistent:
+run.py file contains:
+    from app import app
+    if __name__ == '__main__':
+        app.run()
+.gitignore file contains:
+    my_venv/
+    .env
+.env file contains:
+    FLASK_APP = run.py
+    FLASK_ENV = development
+config.py file contains:
+    import os 
+    basedir = os.path.abspath(os.path.dirname(__name__)) # (gets you base directory for config.py)
+    class Config():
+        FLASK_APP = os.enrivon.get('FLASK_APP') # what is the entrypoint to the application
+        FLASK_ENV = os.environ.get('FLASK_ENV') # could hardcode this in as 'development'
+__init__.py file contains:
+    from flask import Flask
+    from config import Config
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    from . import routes

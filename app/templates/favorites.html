@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>List of my top 5 artists/people/ and other things</h1>
+
+    <h2>My Favorite 5</h2>
+    <ul>
+        {% for top in top_things %}
+            <li>{{ top }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
